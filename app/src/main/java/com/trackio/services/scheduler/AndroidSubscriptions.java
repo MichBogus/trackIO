@@ -1,5 +1,7 @@
 package com.trackio.services.scheduler;
 
+import android.support.annotation.VisibleForTesting;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +11,8 @@ import io.reactivex.disposables.Disposable;
 
 public class AndroidSubscriptions implements SubscriptionsApi {
 
-    private Map<String, List<Disposable>> subscriptions = new HashMap();
+    @VisibleForTesting
+    public Map<String, List<Disposable>> subscriptions = new HashMap();
 
     private String getSubscriberTag(Object subscription) {
         return subscription.toString();

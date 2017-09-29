@@ -6,6 +6,7 @@ import com.trackio.mvp.MapPresenter;
 import com.trackio.mvp.MapShowcaseView;
 import com.trackio.services.WaypointsApi;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentMatchers;
@@ -46,6 +47,14 @@ public class MapPresenterTest {
 
         verify(mockOfWaypointsApi).getTracks();
         verify(mockOfView).setMap(thenReturnTrackList());
+    }
+
+    @Test
+    public void shouldDetachProperly() {
+        systemUnderTest.onAttach(mockOfView);
+        systemUnderTest.onDetach();
+
+        Assertions.assertThat(systemUnderTest.context).isNull();
     }
 
     private List<Track> thenReturnTrackList() {
