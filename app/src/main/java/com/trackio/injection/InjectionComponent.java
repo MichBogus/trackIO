@@ -1,6 +1,8 @@
 package com.trackio.injection;
 
-import com.trackio.MainActivity;
+import com.trackio.injection.modules.SchedulerModule;
+import com.trackio.mvp.MapShowcaseActivity;
+import com.trackio.injection.modules.PresenterModule;
 import com.trackio.injection.modules.ServicesModule;
 
 import javax.inject.Singleton;
@@ -8,7 +10,11 @@ import javax.inject.Singleton;
 import dagger.Component;
 
 @Singleton
-@Component(modules = {ServicesModule.class})
+@Component(modules = {
+        ServicesModule.class,
+        PresenterModule.class,
+        SchedulerModule.class
+})
 public interface InjectionComponent {
-    void inject(MainActivity mainActivity);
+    void inject(MapShowcaseActivity mapActivity);
 }

@@ -39,13 +39,18 @@ dependencies {
     compile viewDependencies.supportCore
     compile viewDependencies.supportAppCompat
     compile viewDependencies.supportDesign
-    compile viewDependencies.constraintLayout
-    compile viewDependencies.glide
+    compile viewDependencies.googleMaps
+    compile viewDependencies.mapMe
+    compile viewDependencies.mapMeGoogleMaps
+    compile viewDependencies.butterKnife
+    annotationProcessor viewDependencies.butterKnifeAP
 
     compile appDependencies.multidex
     compile appDependencies.kotlin
     compile appDependencies.rxandroid
     compile appDependencies.rxjava
+    compile appDependencies.gpxParser
+    compile appDependencies.joda
 
     compile diDependencies.dagger
     kapt diDependencies.daggerCompiler
