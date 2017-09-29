@@ -62,7 +62,7 @@ public class AndroidSubscriptionsTest {
         Assertions.assertThat(disposed).isEqualTo(expectedSize);
     }
 
-    public void givenSubscriptionsAreNotEmpty() {
+    private void givenSubscriptionsAreNotEmpty() {
         List<Disposable> disposableList = new ArrayList<>();
         disposableList.add(Single.just("test").subscribe());
         systemUnderTest.subscriptions.put(this.toString(), disposableList);
