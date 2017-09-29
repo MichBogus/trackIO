@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.trackio"
-        minSdkVersion 19
+        minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -39,13 +39,17 @@ dependencies {
     compile viewDependencies.supportCore
     compile viewDependencies.supportAppCompat
     compile viewDependencies.supportDesign
-    compile viewDependencies.constraintLayout
-    compile viewDependencies.glide
+    compile viewDependencies.googleMaps
+    compile viewDependencies.mapMe
+    compile viewDependencies.mapMeGoogleMaps
 
     compile appDependencies.multidex
     compile appDependencies.kotlin
     compile appDependencies.rxandroid
     compile appDependencies.rxjava
+    compile appDependencies.gpxParser
+    compile appDependencies.joda
+    compile appDependencies.mapCluster
 
     compile diDependencies.dagger
     kapt diDependencies.daggerCompiler

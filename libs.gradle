@@ -16,12 +16,21 @@ ext {
     ok_http_version = '3.6.0'
     glide_version = '3.7.0'
     glide_transofrmation_version = '2.0.2'
+    mapMe_version = '1.0.4'
+    google_play_services_version = '3.1.0'
+    butter_knife_version = '8.8.1'
+    gpxParser_version = '1.0.0'
+    joda_time_version = '2.9.9'
+    mapCluster_version = '0.5'
 
     appDependencies = [
             multidex                    : "com.android.support:multidex:$mutlidex_version",
             kotlin                      : "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version",
             rxandroid                   : "io.reactivex.rxjava2:rxandroid:$rx_android_version",
-            rxjava                      : "io.reactivex.rxjava2:rxjava:$rx_java_version"
+            rxjava                      : "io.reactivex.rxjava2:rxjava:$rx_java_version",
+            gpxParser                   : "io.ticofab.androidgpxparser:parser:$gpxParser_version",
+            joda                        : "net.danlew:android.joda:$joda_time_version",
+            mapCluster                  : "com.google.maps.android:android-maps-utils:$mapCluster_version"
     ]
 
     viewDependencies = [
@@ -29,7 +38,12 @@ ext {
             supportAppCompat            : "com.android.support:appcompat-v7:$support_library_version",
             supportDesign               : "com.android.support:design:$support_library_version",
             constraintLayout            : "com.android.support.constraint:constraint-layout:$constraint_version",
-            glide                       : "com.github.bumptech.glide:glide:$glide_version"
+            glide                       : "com.github.bumptech.glide:glide:$glide_version",
+            googleMaps                  : "com.google.android.gms:play-services-maps:$google_play_services_version",
+            mapMe                       : "nz.co.trademe.mapme:mapme:$mapMe_version",
+            mapMeGoogleMaps             : "nz.co.trademe.mapme:googlemaps:$mapMe_version",
+            butterKnife                 : "com.jakewharton:butterknife:$butter_knife_version",
+            butterKnifeAP               : "com.jakewharton:butterknife-compiler:$butter_knife_version"
     ]
 
     diDependencies = [
