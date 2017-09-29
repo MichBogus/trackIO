@@ -1,14 +1,54 @@
 ext {
 
-    appDependencies = [
+    support_library_version = '26.1.0'
+    constraint_version = '1.0.2'
+    dagger_version = '2.7'
+    kotlin_version = '1.1.50'
+    retrofit_version = '2.2.0'
+    mutlidex_version = '1.0.1'
+    rx_android_version = '2.0.1'
+    rx_java_version = '2.0.5'
+    kotlin_mockito_version = '1.4.0'
+    mockito_version = '2.2.3'
+    junit_version = '4.11'
+    assertJ_version = '1.7.1'
+    assertJ_android_version = '1.1.1'
+    ok_http_version = '3.6.0'
+    glide_version = '3.7.0'
+    glide_transofrmation_version = '2.0.2'
 
+    appDependencies = [
+            multidex                    : "com.android.support:multidex:$mutlidex_version",
+            kotlin                      : "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version",
+            rxandroid                   : "io.reactivex.rxjava2:rxandroid:$rx_android_version",
+            rxjava                      : "io.reactivex.rxjava2:rxjava:$rx_java_version"
+    ]
+
+    viewDependencies = [
+            supportCore                 : "com.android.support:support-core-utils:$support_library_version",
+            supportAppCompat            : "com.android.support:appcompat-v7:$support_library_version",
+            supportDesign               : "com.android.support:design:$support_library_version",
+            constraintLayout            : "com.android.support.constraint:constraint-layout:$constraint_version",
+            glide                       : "com.github.bumptech.glide:glide:$glide_version"
+    ]
+
+    diDependencies = [
+            dagger                      : "com.google.dagger:dagger:$dagger_version",
+            daggerCompiler              : "com.google.dagger:dagger-compiler:$dagger_version"
     ]
 
     testDependencies = [
-
+            junit                       : "junit:junit:$junit_version",
+            mockito                     : "org.mockito:mockito-core:$mockito_version",
+            mockitoKotlin               : "com.nhaarman:mockito-kotlin:$kotlin_mockito_version",
+            assertJ                     : "org.assertj:assertj-core:$assertJ_version",
+            assertJAndroid              : "org.assertj:assertj-core:$assertJ_android_version"
     ]
 
     networkDependencies = [
-
+            retrofit                    : "com.squareup.retrofit2:retrofit:$retrofit_version",
+            retrofitRx                  : "com.squareup.retrofit2:adapter-rxjava:$retrofit_version",
+            gson                        : "com.squareup.retrofit2:converter-gson:$retrofit_version",
+            okhttp                      : "com.squareup.okhttp3:okhttp:$ok_http_version",
     ]
 }

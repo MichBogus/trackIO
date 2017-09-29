@@ -1,22 +1,40 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
+apply from: 'libs.gradle'
+
 buildscript {
     ext.kotlin_version = '1.1.50'
+
     repositories {
         jcenter()
+        mavenCentral()
     }
+
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
+        classpath 'de.mobilej.unmock:UnMockPlugin:0.6.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath 'com.google.gms:google-services:3.1.0'
     }
 }
 
 allprojects {
     repositories {
         jcenter()
+        maven { url "https://maven.google.com" }
+    }
+}
+
+
+subprojects {
+    configurations.all {
+        resolutionStrategy {
+            forcedModules = [
+                    "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version",
+                    "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version",
+            ]
+        }
     }
 }
 
