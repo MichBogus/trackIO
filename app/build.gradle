@@ -42,8 +42,6 @@ dependencies {
     compile viewDependencies.googleMaps
     compile viewDependencies.mapMe
     compile viewDependencies.mapMeGoogleMaps
-    compile viewDependencies.butterKnife
-    annotationProcessor viewDependencies.butterKnifeAP
 
     compile appDependencies.multidex
     compile appDependencies.kotlin
