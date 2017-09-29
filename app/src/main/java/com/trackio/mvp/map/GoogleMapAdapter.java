@@ -2,11 +2,12 @@ package com.trackio.mvp.map;
 
 import android.content.Context;
 
+import com.trackio.mvp.model.TrackPointCluster;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import io.ticofab.androidgpxparser.parser.domain.TrackPoint;
 import nz.co.trademe.mapme.LatLng;
 import nz.co.trademe.mapme.MapMeAdapter;
 import nz.co.trademe.mapme.annotations.AnnotationFactory;
@@ -14,9 +15,9 @@ import nz.co.trademe.mapme.annotations.MapAnnotation;
 
 public class GoogleMapAdapter extends MapMeAdapter {
 
-    private List<TrackPoint> markers;
+    private List<TrackPointCluster> markers;
 
-    public GoogleMapAdapter(Context context, List<TrackPoint> markers, AnnotationFactory factory) {
+    public GoogleMapAdapter(Context context, List<TrackPointCluster> markers, AnnotationFactory factory) {
         super(context, factory);
         this.markers = markers;
     }
@@ -24,8 +25,8 @@ public class GoogleMapAdapter extends MapMeAdapter {
     @NotNull
     @Override
     public MapAnnotation onCreateAnnotation(AnnotationFactory annotationFactory, int position, int annotationType) {
-        TrackPoint item = markers.get(position);
-        return annotationFactory.createMarker(new LatLng(item.getLatitude(), item.getLongitude()), null, item.getName());
+        TrackPointCluster item = markers.get(position);
+        return annotationFactory.createMarker(new LatLng(item.getPosition().latitude, item.getPosition().longitude), null, item.getTitle());
     }
 
     @Override

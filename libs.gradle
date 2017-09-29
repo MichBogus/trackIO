@@ -21,6 +21,7 @@ ext {
     butter_knife_version = '8.8.1'
     gpxParser_version = '1.0.0'
     joda_time_version = '2.9.9'
+    mapCluster_version = '0.5'
 
     appDependencies = [
             multidex                    : "com.android.support:multidex:$mutlidex_version",
@@ -28,7 +29,8 @@ ext {
             rxandroid                   : "io.reactivex.rxjava2:rxandroid:$rx_android_version",
             rxjava                      : "io.reactivex.rxjava2:rxjava:$rx_java_version",
             gpxParser                   : "io.ticofab.androidgpxparser:parser:$gpxParser_version",
-            joda                        : "net.danlew:android.joda:$joda_time_version"
+            joda                        : "net.danlew:android.joda:$joda_time_version",
+            mapCluster                  : "com.google.maps.android:android-maps-utils:$mapCluster_version"
     ]
 
     viewDependencies = [

@@ -7,9 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.maps.android.clustering.ClusterManager;
 import com.trackio.R;
 import com.trackio.application.TrackIOApplication;
 import com.trackio.mvp.map.GoogleMapAdapter;
+import com.trackio.mvp.model.TrackPointCluster;
+import com.trackio.mvp.utils.TrackPointConverter;
 
 import java.util.List;
 
@@ -25,6 +28,7 @@ public class MapShowcaseActivity extends AppCompatActivity implements MapShowcas
     MapPresenter presenter;
 
     private MapView mapView;
+    private ClusterManager<TrackPointCluster> clusterManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,14 +80,26 @@ public class MapShowcaseActivity extends AppCompatActivity implements MapShowcas
 
     @Override
     public void setMap(List<Track> trackList) {
-        final MapMeAdapter googleMapAdapter = new GoogleMapAdapter(this, trackList.get(1).getTrackSegments().get(0).getTrackPoints(), new GoogleMapAnnotationFactory());
+        final List<TrackPointCluster> trackPointClusterList = TrackPointConverter.convertTrackPoint(trackList.get(1).getTrackSegments().get(0).getTrackPoints());
+        final MapMeAdapter googleMapAdapter = new GoogleMapAdapter(this, trackPointClusterList, new GoogleMapAnnotationFactory());
 
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
+                clusterMarkersOnTheMap(googleMap, trackPointClusterList);
+
                 googleMapAdapter.attach(mapView, googleMap);
                 googleMapAdapter.notifyDataSetChanged();
             }
         });
+    }
+
+    private void clusterMarkersOnTheMap(GoogleMap googleMap, List<TrackPointCluster> trackPointClusterList) {
+        clusterManager = new ClusterManager<>(MapShowcaseActivity.this, googleMap);
+        googleMap.setOnCameraIdleListener(clusterManager);
+        googleMap.setOnMarkerClickListener(clusterManager);
+        googleMap.setOnInfoWindowClickListener(clusterManager);
+        clusterManager.addItems(trackPointClusterList);
+        clusterManager.cluster();
     }
 }

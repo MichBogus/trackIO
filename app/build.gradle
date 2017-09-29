@@ -49,6 +49,7 @@ dependencies {
     compile appDependencies.rxjava
     compile appDependencies.gpxParser
     compile appDependencies.joda
+    compile appDependencies.mapCluster
 
     compile diDependencies.dagger
     kapt diDependencies.daggerCompiler
