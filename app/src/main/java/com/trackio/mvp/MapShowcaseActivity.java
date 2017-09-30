@@ -85,20 +85,11 @@ public class MapShowcaseActivity extends AppCompatActivity implements MapShowcas
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
-                clusterMarkersOnTheMap(googleMap, trackList);
+                presenter.clusterMarkersOnTheMap(googleMap, trackList);
 
                 googleMapAdapter.attach(mapView, googleMap);
                 googleMapAdapter.notifyDataSetChanged();
             }
         });
-    }
-
-    private void clusterMarkersOnTheMap(GoogleMap googleMap, List<TrackPointCluster> trackPointClusterList) {
-        clusterManager = new ClusterManager<>(MapShowcaseActivity.this, googleMap);
-        googleMap.setOnCameraIdleListener(clusterManager);
-        googleMap.setOnMarkerClickListener(clusterManager);
-        googleMap.setOnInfoWindowClickListener(clusterManager);
-        clusterManager.addItems(trackPointClusterList);
-        clusterManager.cluster();
     }
 }

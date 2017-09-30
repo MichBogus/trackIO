@@ -9,16 +9,15 @@ import com.trackio.mvp.utils.TrackPointConverterApi;
 import com.trackio.services.WaypointsApi;
 
 import org.assertj.core.api.Assertions;
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentMatchers;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.ticofab.androidgpxparser.parser.domain.Track;
-import io.ticofab.androidgpxparser.parser.domain.TrackSegment;
+import io.ticofab.androidgpxparser.parser.domain.TrackPoint;
 
 import static com.nhaarman.mockito_kotlin.MockitoKt.whenever;
 import static org.mockito.Mockito.mock;
@@ -35,8 +34,7 @@ public class MapPresenterTest {
     Context mockOfContext = mock(Context.class);
 
     @Before
-    public void setUp() throws IOException {
-
+    public void setUp() {
         systemUnderTest = spy(new MapPresenter(mockOfWaypointsApi, mockOfTrackPointConverter));
 
         systemUnderTest.context = mockOfContext;
@@ -44,11 +42,13 @@ public class MapPresenterTest {
 
     @Test
     public void shouldAttachProperly() {
-        whenever(mockOfWaypointsApi.getTracks()).thenReturn(thenReturnTrackList());
+        List<TrackPoint> expectedValue = thenReturnTrackPointList();
+        whenever(mockOfWaypointsApi.getTrackPoints(MapPresenter.SMALLEST_TRACK)).thenReturn(expectedValue);
 
         systemUnderTest.onAttach(mockOfView);
 
         verify(mockOfWaypointsApi).getTrackPoints(MapPresenter.SMALLEST_TRACK);
+        verify(mockOfTrackPointConverter).convertTrackPoint(expectedValue);
         verify(mockOfView).setMap(ArgumentMatchers.<TrackPointCluster>anyList());
     }
 
@@ -58,13 +58,20 @@ public class MapPresenterTest {
         systemUnderTest.onDetach();
 
         Assertions.assertThat(systemUnderTest.context).isNull();
+        Assertions.assertThat(systemUnderTest.clusterManager).isNull();
     }
 
-    private List<Track> thenReturnTrackList() {
-        List<Track> tracks = new ArrayList<>();
-        tracks.add(new Track.Builder()
-                .setTrackName("test")
-                .setTrackSegments(ArgumentMatchers.<TrackSegment>anyList()).build());
-        return tracks;
+    private List<TrackPoint> thenReturnTrackPointList() {
+        TrackPoint trackPoint = (TrackPoint) new TrackPoint.Builder()
+                .setName("test")
+                .setLatitude(0.0)
+                .setLongitude(0.0)
+                .setTime(new DateTime(100))
+                .build();
+
+        List<TrackPoint> listToBeConverted = new ArrayList<>();
+        listToBeConverted.add(trackPoint);
+
+        return listToBeConverted;
     }
 }
