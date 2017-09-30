@@ -13,9 +13,14 @@ public class TrackPointConverter {
     public static List<TrackPointCluster> convertTrackPoint(List<TrackPoint> trackPointList) {
         List<TrackPointCluster> trackPointCluster = new ArrayList<>();
         for (TrackPoint trackPoint : trackPointList) {
-            trackPointCluster.add(new TrackPointCluster(new LatLng(trackPoint.getLatitude(), trackPoint.getLongitude()), trackPoint.getName(), trackPoint.getTime().toString()));
+            if (!areTrackPointCordsEmpty(trackPoint)) {
+                trackPointCluster.add(new TrackPointCluster(new LatLng(trackPoint.getLatitude(), trackPoint.getLongitude()), trackPoint.getName(), trackPoint.getTime().toString()));
+            }
         }
         return trackPointCluster;
     }
 
+    private static boolean areTrackPointCordsEmpty(TrackPoint trackPoint) {
+        return trackPoint.getLatitude() == 0 || trackPoint.getLongitude() == 0;
+    }
 }
