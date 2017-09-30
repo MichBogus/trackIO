@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.trackio.mvp.MapPresenter;
 import com.trackio.mvp.MapShowcaseView;
+import com.trackio.mvp.model.TrackPointCluster;
+import com.trackio.mvp.utils.TrackPointConverterApi;
 import com.trackio.services.WaypointsApi;
 
 import org.assertj.core.api.Assertions;
@@ -29,12 +31,13 @@ public class MapPresenterTest {
 
     MapShowcaseView mockOfView = mock(MapShowcaseView.class);
     WaypointsApi mockOfWaypointsApi = mock(WaypointsApi.class);
+    TrackPointConverterApi mockOfTrackPointConverter = mock(TrackPointConverterApi.class);
     Context mockOfContext = mock(Context.class);
 
     @Before
     public void setUp() throws IOException {
 
-        systemUnderTest = spy(new MapPresenter(mockOfWaypointsApi));
+        systemUnderTest = spy(new MapPresenter(mockOfWaypointsApi, mockOfTrackPointConverter));
 
         systemUnderTest.context = mockOfContext;
     }
@@ -45,8 +48,8 @@ public class MapPresenterTest {
 
         systemUnderTest.onAttach(mockOfView);
 
-        verify(mockOfWaypointsApi).getTracks();
-        verify(mockOfView).setMap(thenReturnTrackList());
+        verify(mockOfWaypointsApi).getTrackPoints(MapPresenter.SMALLEST_TRACK);
+        verify(mockOfView).setMap(ArgumentMatchers.<TrackPointCluster>anyList());
     }
 
     @Test

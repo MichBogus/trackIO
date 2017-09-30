@@ -79,14 +79,13 @@ public class MapShowcaseActivity extends AppCompatActivity implements MapShowcas
     }
 
     @Override
-    public void setMap(List<Track> trackList) {
-        final List<TrackPointCluster> trackPointClusterList = TrackPointConverter.convertTrackPoint(trackList.get(1).getTrackSegments().get(0).getTrackPoints());
-        final MapMeAdapter googleMapAdapter = new GoogleMapAdapter(this, trackPointClusterList, new GoogleMapAnnotationFactory());
+    public void setMap(final List<TrackPointCluster> trackList) {
+        final MapMeAdapter googleMapAdapter = new GoogleMapAdapter(this, trackList, new GoogleMapAnnotationFactory());
 
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
-                clusterMarkersOnTheMap(googleMap, trackPointClusterList);
+                clusterMarkersOnTheMap(googleMap, trackList);
 
                 googleMapAdapter.attach(mapView, googleMap);
                 googleMapAdapter.notifyDataSetChanged();

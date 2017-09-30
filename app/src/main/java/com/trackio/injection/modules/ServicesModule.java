@@ -1,6 +1,8 @@
 package com.trackio.injection.modules;
 
 import com.trackio.application.TrackIOApplication;
+import com.trackio.mvp.utils.TrackPointConverter;
+import com.trackio.mvp.utils.TrackPointConverterApi;
 import com.trackio.services.WaypointsApi;
 import com.trackio.services.WaypointsService;
 import com.trackio.services.scheduler.SchedulerApi;
@@ -26,6 +28,11 @@ public class ServicesModule {
     @Provides
     public GPXParser provideGPXParser() {
         return new GPXParser();
+    }
+
+    @Provides
+    public TrackPointConverterApi provideTrackPointConverter() {
+        return new TrackPointConverter();
     }
 
     @Provides

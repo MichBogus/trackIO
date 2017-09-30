@@ -14,6 +14,7 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.ticofab.androidgpxparser.parser.GPXParser;
 import io.ticofab.androidgpxparser.parser.domain.Track;
+import io.ticofab.androidgpxparser.parser.domain.TrackPoint;
 
 public class WaypointsService implements WaypointsApi {
 
@@ -73,5 +74,10 @@ public class WaypointsService implements WaypointsApi {
     @Override
     public List<Track> getTracks() {
         return listOfTracks;
+    }
+
+    @Override
+    public List<TrackPoint> getTrackPoints(int fromTrackNumber) {
+        return listOfTracks.get(fromTrackNumber).getTrackSegments().get(0).getTrackPoints();
     }
 }

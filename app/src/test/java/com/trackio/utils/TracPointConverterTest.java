@@ -6,6 +6,7 @@ import com.trackio.mvp.utils.TrackPointConverter;
 
 import org.assertj.core.api.Assertions;
 import org.joda.time.DateTime;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -16,13 +17,19 @@ import io.ticofab.androidgpxparser.parser.domain.TrackPoint;
 public class TracPointConverterTest {
 
     DateTime mockOfCurrentTime = new DateTime(100);
+    TrackPointConverter systemUnderTest;
+
+    @Before
+    public void setUp() {
+        systemUnderTest = new TrackPointConverter();
+    }
 
     @Test
     public void shouldConvertDataProperly() {
         List<TrackPointCluster> expectedValue = new ArrayList<>();
         expectedValue.add(new TrackPointCluster(new LatLng(20, 20), "test", mockOfCurrentTime.toString()));
 
-        List<TrackPointCluster> afterConverting = TrackPointConverter.convertTrackPoint(dataToBeConverted());
+        List<TrackPointCluster> afterConverting = systemUnderTest.convertTrackPoint(dataToBeConverted());
 
         Assertions.assertThat(afterConverting.get(0).getPosition()).isEqualTo(expectedValue.get(0).getPosition());
         Assertions.assertThat(afterConverting.get(0).getSnippet()).isEqualTo(expectedValue.get(0).getSnippet());
@@ -33,7 +40,7 @@ public class TracPointConverterTest {
     public void shouldNotConvertWhenTrackPointHasEmptyCords() {
         int expectedSize = 0;
 
-        List<TrackPointCluster> afterConverting = TrackPointConverter.convertTrackPoint(dataToBeConvertedWithEmptyCords());
+        List<TrackPointCluster> afterConverting = systemUnderTest.convertTrackPoint(dataToBeConvertedWithEmptyCords());
 
         Assertions.assertThat(afterConverting.size()).isEqualTo(expectedSize);
     }

@@ -8,9 +8,10 @@ import java.util.List;
 
 import io.ticofab.androidgpxparser.parser.domain.TrackPoint;
 
-public class TrackPointConverter {
+public class TrackPointConverter implements TrackPointConverterApi {
 
-    public static List<TrackPointCluster> convertTrackPoint(List<TrackPoint> trackPointList) {
+    @Override
+    public List<TrackPointCluster> convertTrackPoint(List<TrackPoint> trackPointList) {
         List<TrackPointCluster> trackPointCluster = new ArrayList<>();
         for (TrackPoint trackPoint : trackPointList) {
             if (!areTrackPointCordsEmpty(trackPoint)) {
@@ -20,7 +21,7 @@ public class TrackPointConverter {
         return trackPointCluster;
     }
 
-    private static boolean areTrackPointCordsEmpty(TrackPoint trackPoint) {
+    private boolean areTrackPointCordsEmpty(TrackPoint trackPoint) {
         return trackPoint.getLatitude() == 0 || trackPoint.getLongitude() == 0;
     }
 }
